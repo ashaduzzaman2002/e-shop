@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { axiosInstance } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const navigate = useNavigate()
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -12,15 +15,26 @@ const Login = () => {
   const [visible, setVisible] = useState(false);
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const { data } = await axiosInstance.post("/user/login", inputs);
+
+      toast.success('Login successful');
+      navigate('/')
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message);
+    }
   };
 
+  
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

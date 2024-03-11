@@ -34,7 +34,11 @@ const Signup = () => {
       });
 
       formData.append("file", file);
-      const { data } = await axiosInstance.post("/user/create", formData);
+      const { data } = await axiosInstance.post("/user/create", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log(data);
 
       toast.success(data?.message);
