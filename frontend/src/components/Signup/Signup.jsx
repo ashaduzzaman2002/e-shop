@@ -32,7 +32,6 @@ const Signup = () => {
       Object.keys(inputs).forEach((key) => {
         formData.append(key, inputs[key]);
       });
-
       formData.append("file", file);
       const { data } = await axiosInstance.post("/user/create", formData, {
         headers: {

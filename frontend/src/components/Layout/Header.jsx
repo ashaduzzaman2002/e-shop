@@ -16,11 +16,13 @@ import { useSelector } from "react-redux";
 // import Cart from "../cart/Cart";
 // import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
+import { productData } from "../../static/data";
+import debounce from "lodash.debounce";
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
-//   const { isSeller } = useSelector((state) => state.seller);
-  const wishlist  = [];
+  //   const { isSeller } = useSelector((state) => state.seller);
+  const wishlist = [];
   const cart = [];
   const allProducts = [];
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,17 +33,21 @@ const Header = ({ activeHeading }) => {
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = debounce((e) => {
     const term = e.target.value;
     setSearchTerm(term);
 
-    const filteredProducts =
-      allProducts &&
-      allProducts.filter((product) =>
-        product.name.toLowerCase().includes(term.toLowerCase())
-      );
+    // const debouncedSearch = debounce(() => {
+    const filteredProducts = productData?.filter((product) =>
+      product.name.toLowerCase().includes(term.toLowerCase())
+    );
     setSearchData(filteredProducts);
-  };
+    // }, 800);
+
+    console.log('object')
+
+    // debouncedSearch();
+  }, 400);
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 70) {
@@ -68,7 +74,7 @@ const Header = ({ activeHeading }) => {
             <input
               type="text"
               placeholder="Search Product..."
-              value={searchTerm}
+              // value={searchTerm}
               onChange={handleSearchChange}
               className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded-md"
             />
@@ -76,23 +82,23 @@ const Header = ({ activeHeading }) => {
               size={30}
               className="absolute right-2 top-1.5 cursor-pointer"
             />
-            {searchData && searchData.length !== 0 ? (
-              <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
-                {searchData &&
-                  searchData.map((i, index) => {
-                    return (
-                      <Link to={`/product/${i._id}`}>
-                        <div className="w-full flex items-start-py-3">
-                          <img
-                            src={`${i.images[0]?.url}`}
-                            alt=""
-                            className="w-[40px] h-[40px] mr-[10px]"
-                          />
-                          <h1>{i.name}</h1>
-                        </div>
-                      </Link>
-                    );
-                  })}
+            {searchData?.length ? (
+              <div className="absolute min-h-[30vh] flex flex-col gap-2 w-full bg-slate-50 shadow-sm-2 z-[9] p-4">
+                {searchData?.map((i, index) => (
+                  <Link key={index} to={`/product/${i._id}`}>
+                    <div className="w-full flex items-center">
+                      <img
+                        src={`${
+                          (i?.image_Url?.length && i?.image_Url[0]?.url) ||
+                          "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D"
+                        }`}
+                        alt=""
+                        className="w-[40px] h-[40px] mr-[10px]"
+                      />
+                      <h1>{i.name}</h1>
+                    </div>
+                  </Link>
+                ))}
               </div>
             ) : null}
           </div>
