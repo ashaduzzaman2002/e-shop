@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 // import Cart from "../cart/Cart";
 // import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
-import { productData } from "../../static/data";
+import { categoriesData, productData } from "../../static/data";
 import debounce from "lodash.debounce";
 
 const Header = ({ activeHeading }) => {
@@ -44,7 +44,7 @@ const Header = ({ activeHeading }) => {
     setSearchData(filteredProducts);
     // }, 800);
 
-    console.log('object')
+    console.log("object");
 
     // debouncedSearch();
   }, 400);
@@ -83,23 +83,23 @@ const Header = ({ activeHeading }) => {
               className="absolute right-2 top-1.5 cursor-pointer"
             />
             {searchData?.length ? (
-              <div className="absolute min-h-[30vh] flex flex-col gap-2 w-full bg-slate-50 shadow-sm-2 z-[9] p-4">
-                {searchData?.map((i, index) => (
-                  <Link key={index} to={`/product/${i._id}`}>
-                    <div className="w-full flex items-center">
-                      <img
-                        src={`${
-                          (i?.image_Url?.length && i?.image_Url[0]?.url) ||
-                          "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D"
-                        }`}
-                        alt=""
-                        className="w-[40px] h-[40px] mr-[10px]"
-                      />
-                      <h1>{i.name}</h1>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                <div className="absolute min-h-[30vh] flex flex-col gap-2 w-full bg-slate-50 shadow-sm-2 z-[9] p-4">
+                  {searchData?.map((i, index) => (
+                    <Link key={index} to={`/product/${i._id}`}>
+                      <div className="w-full flex items-center">
+                        <img
+                          src={`${
+                            (i?.image_Url?.length && i?.image_Url[0]?.url) ||
+                            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D"
+                          }`}
+                          alt=""
+                          className="w-[40px] h-[40px] mr-[10px]"
+                        />
+                        <h1>{i.name}</h1>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
             ) : null}
           </div>
 
@@ -135,12 +135,12 @@ const Header = ({ activeHeading }) => {
                 className="absolute right-2 top-4 cursor-pointer"
                 onClick={() => setDropDown(!dropDown)}
               />
-              {/* {dropDown ? (
+              {dropDown ? (
                 <DropDown
                   categoriesData={categoriesData}
                   setDropDown={setDropDown}
                 />
-              ) : null} */}
+              ) : null}
             </div>
           </div>
           {/* navitems */}
@@ -156,7 +156,7 @@ const Header = ({ activeHeading }) => {
               >
                 <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                  {/* {wishlist && wishlist.length} */}
+                  {/* {wishlist && wishlist.length} */}0
                 </span>
               </div>
             </div>
@@ -171,7 +171,7 @@ const Header = ({ activeHeading }) => {
                   color="rgb(255 255 255 / 83%)"
                 />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                  {cart && cart.length}
+                  {cart && cart.length || 0}
                 </span>
               </div>
             </div>
@@ -236,7 +236,7 @@ const Header = ({ activeHeading }) => {
             >
               <AiOutlineShoppingCart size={30} />
               <span class="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
-                {/* {cart && cart.length} */}
+                {/* {cart && cart.length} */}0
               </span>
             </div>
           </div>
@@ -277,7 +277,6 @@ const Header = ({ activeHeading }) => {
                   type="search"
                   placeholder="Search Product..."
                   className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded-md"
-                  value={searchTerm}
                   onChange={handleSearchChange}
                 />
                 {searchData && (

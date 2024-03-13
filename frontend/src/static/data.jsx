@@ -102,13 +102,13 @@ export const categoriesData = [
     title: "Gifts",
     subTitle: "",
     image_Url:
-      "https://securecdn.pymnts.com/wp-content/uploads/2014/11/Gifts-Photo-700x489.jpg",
+      "https://img.freepik.com/free-vector/simple-green-gift-box_1308-135455.jpg",
   },
   {
     id: 7,
     title: "Pet Care",
     subTitle: "",
-    image_Url: "https://cdn.openpr.com/T/c/Tc15444071_g.jpg",
+    image_Url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Doushouqi-dog.svg/800px-Doushouqi-dog.svg.png",
   },
   {
     id: 8,
@@ -144,7 +144,7 @@ export const productData = [
     image_Url: [
       {
         public_id: "test",
-        url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D",
+        url: "https://pngimg.com/d/macbook_PNG35.png",
       },
       {
         public_id: "test",
@@ -204,7 +204,7 @@ export const productData = [
     image_Url: [
       {
         public_id: "test",
-        url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3Dg",
+        url: "https://pngimg.com/d/macbook_PNG35.png",
       },
       {
         public_id: "test",
